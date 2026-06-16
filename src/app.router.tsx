@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { createBrowserRouter, Navigate } from "react-router";
+import { createHashRouter, Navigate } from "react-router";
 
 import { ShopLayout } from "./shop/layouts/ShopLayout";
 
@@ -23,7 +23,7 @@ const AuthLayout = lazy(() => import("./auth/layouts/AuthLayout"));
 const AdminLayout = lazy(() => import("./admin/layouts/AdminLayout"));
 
 // Creamos router para las rutas del navegador
-export const appRouter = createBrowserRouter([
+export const appRouter = createHashRouter([
     // Rutas publicas
     {
         path: "/",
