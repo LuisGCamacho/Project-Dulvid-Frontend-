@@ -187,13 +187,13 @@ export const CustomHeader = () => {
                                 Inicio
                             </Link>
 
-                            <Link to="/men" onClick={() => setIsOpen(false)}>
-                                Productos
-                            </Link>
-
                             <p className="text-sm font-medium transition-colors hover:text-violet-600 cursor-pointer">
                                 Nosotros
                             </p>
+
+                            <Link to="/women" onClick={() => setIsOpen(false)}>
+                                Productos
+                            </Link>
 
                             <Link
                                 to="/gender/men"
@@ -203,10 +203,10 @@ export const CustomHeader = () => {
                             </Link>
 
                             <Link
-                                to="/gender/women"
+                                to="/gender/kid"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Hombres
+                                Promociones
                             </Link>
 
                             <Link
