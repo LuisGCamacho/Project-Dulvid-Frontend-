@@ -187,9 +187,13 @@ export const CustomHeader = () => {
                                 Inicio
                             </Link>
 
-                            <Link to="/" onClick={() => setIsOpen(false)}>
+                            <Link to="/men" onClick={() => setIsOpen(false)}>
                                 Productos
                             </Link>
+
+                            <p className="text-sm font-medium transition-colors hover:text-violet-600 cursor-pointer">
+                                Nosotros
+                            </p>
 
                             <Link
                                 to="/gender/men"
@@ -199,25 +203,22 @@ export const CustomHeader = () => {
                             </Link>
 
                             <Link
-                                to="/gender/men"
+                                to="/gender/women"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Hombres
                             </Link>
 
                             <Link
-                                to="/gender/women"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                Mujeres
-                            </Link>
-
-                            <Link
                                 to="/gender/kid"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Niños
+                                Promociones
                             </Link>
+
+                            <p className="text-sm font-medium transition-colors hover:text-violet-600 cursor-pointer">
+                                Contacto
+                            </p>
 
                             <div className="border-t pt-4">
                                 {authStatus === "not-authenticated" ? (
