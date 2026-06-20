@@ -7,7 +7,6 @@ export const createUpdateProductAction = async (
 ): Promise<Product> => {
     await sleep(1500);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, user, images = [], files = [], ...rest } = productLike;
 
     const isCreating = id === "new";
