@@ -1,50 +1,29 @@
-import React from "react";
 import type { LucideIcon } from "lucide-react";
 
-interface StatCardProps {
+interface Props {
     title: string;
     value: string;
-    change: string;
-    changeType: "positive" | "negative" | "neutral";
+    subtitle: string;
     icon: LucideIcon;
-    color: string;
 }
 
-// Tarjeta de valores
-const StatCard: React.FC<StatCardProps> = ({
-    title,
-    value,
-    change,
-    changeType,
-    icon: Icon,
-    color,
-}) => {
-    const changeColor = {
-        positive: "text-green-600 bg-green-50",
-        negative: "text-red-600 bg-red-50",
-        neutral: "text-gray-600 bg-gray-50",
-    }[changeType];
-
+export const StatCard = ({ title, value, subtitle, icon: Icon }: Props) => {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between">
-                <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">
-                        {title}
-                    </p>
-                    <p className="text-3xl font-bold text-gray-900">{value}</p>
-                    <div
-                        className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium mt-2 ${changeColor}`}
-                    >
-                        {change}
-                    </div>
+        <div className="bg-white border border-[#ECE9F5] rounded-xl p-4">
+            {/* Icono + título */}
+            <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-violet-600" />
                 </div>
-                <div className={`p-3 rounded-lg ${color}`}>
-                    <Icon size={24} className="text-white" />
-                </div>
+
+                <p className="text-sm font-medium text-gray-500">{title}</p>
             </div>
+
+            {/* Valor */}
+            <h3 className="text-3xl font-bold text-gray-900">{value}</h3>
+
+            {/* Subtítulo */}
+            <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
         </div>
     );
 };
-
-export default StatCard;

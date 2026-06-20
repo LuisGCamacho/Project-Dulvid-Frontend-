@@ -51,7 +51,7 @@ export const AdminProductsPage = () => {
 
                 <div className="flex justify-end mb-10 gap-4">
                     <Link to="/admin/products/new">
-                        <Button className="bg-violet-700">
+                        <Button className="bg-violet-700 py-5 hover:bg-violet-900">
                             <PlusIcon />
                             Nuevo producto
                         </Button>
@@ -62,7 +62,7 @@ export const AdminProductsPage = () => {
             <div className="bg-white shadow-xs border border-gray-200 rounded-xl overflow-hidden mb-10">
                 <Table>
                     <TableHeader>
-                        <TableRow>
+                        <TableRow className="bg-[#F4EDFF]">
                             <TableHead>Imagen</TableHead>
                             <TableHead>Nombre</TableHead>
                             <TableHead>Precio</TableHead>
@@ -98,7 +98,7 @@ export const AdminProductsPage = () => {
                                         <Link
                                             to={`/admin/products/${product.id}`}
                                         >
-                                            <PencilIcon className="text-violet-700 w-4 h-4" />
+                                            <PencilIcon className="text-violet-700 w-4 h-4 border-2" />
                                         </Link>
 
                                         <button

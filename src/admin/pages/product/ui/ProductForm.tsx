@@ -143,7 +143,7 @@ export const ProductForm = ({
             <div className="flex justify-between items-center">
                 <AdminTitle title={title} subtitle={subTitle} />
                 <div className="flex justify-end mb-10 gap-4">
-                    <Button variant="outline" type="button">
+                    <Button variant="outline" type="button" className="py-5">
                         <Link
                             to="/admin/products"
                             className="flex items-center gap-2"
@@ -153,7 +153,11 @@ export const ProductForm = ({
                         </Link>
                     </Button>
 
-                    <Button type="submit" disabled={isPending}>
+                    <Button
+                        type="submit"
+                        disabled={isPending}
+                        className="bg-violet-700 py-5 hover:bg-violet-900"
+                    >
                         <SaveAll className="w-4 h-4" />
                         Guardar cambios
                     </Button>
