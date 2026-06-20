@@ -98,7 +98,7 @@ export const AdminProductsPage = () => {
                                         <Link
                                             to={`/admin/products/${product.id}`}
                                         >
-                                            <PencilIcon className="text-violet-700 w-4 h-4 border-2" />
+                                            <PencilIcon className="text-violet-700 w-4 h-4" />
                                         </Link>
 
                                         <button
