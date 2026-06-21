@@ -66,9 +66,21 @@ export const ProductForm = ({
     const labelInputRef = useRef<HTMLInputElement>(null);
     const [files, setFiles] = useState<File[]>([]);
 
+    const [images, setImages] = useState<string[]>(product.images);
+
     useEffect(() => {
         setFiles([]);
-    }, [product]);
+        setImages(product.images);
+
+        setValue("images", product.images);
+    }, [product, setValue]);
+
+    const handleRemoveImage = (index: number) => {
+        const updatedImages = images.filter((_, i) => i !== index);
+
+        setImages(updatedImages);
+        setValue("images", updatedImages);
+    };
 
     // Cada vez que alguno de estos cambien se detonara un re-render
     const selectedSizes = watch("sizes");
@@ -138,8 +150,16 @@ export const ProductForm = ({
         setValue("files", [...currentFiles, ...Array.from(files)]);
     };
 
+    const submitForm = async (data: FormInputs) => {
+        await onSubmit({
+            ...data,
+            images,
+            files,
+        });
+    };
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(submitForm)}>
             <div className="flex justify-between items-center">
                 <AdminTitle title={title} subtitle={subTitle} />
                 <div className="flex justify-end mb-10 gap-4">
@@ -484,7 +504,7 @@ export const ProductForm = ({
                                     Imágenes actuales
                                 </h3>
                                 <div className="grid grid-cols-2 gap-3">
-                                    {product.images.map((image, index) => (
+                                    {images.map((image, index) => (
                                         <div
                                             key={index}
                                             className="relative group"
@@ -496,7 +516,12 @@ export const ProductForm = ({
                                                     className="w-full h-full object-cover rounded-lg"
                                                 />
                                             </div>
-                                            <button className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                            <button
+                                                className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                                                onClick={() =>
+                                                    handleRemoveImage(index)
+                                                }
+                                            >
                                                 <X className="h-3 w-3" />
                                             </button>
                                             <p className="mt-1 text-xs text-slate-600 truncate">
