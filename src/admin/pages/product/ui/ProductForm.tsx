@@ -59,6 +59,7 @@ export const ProductForm = ({
         getValues,
         setValue,
         watch,
+        reset,
     } = useForm<FormInputs>({
         defaultValues: product,
     });
@@ -69,11 +70,13 @@ export const ProductForm = ({
     const [images, setImages] = useState<string[]>(product.images);
 
     useEffect(() => {
-        setFiles([]);
-        setImages(product.images);
+        reset(product);
 
-        setValue("images", product.images);
-    }, [product, setValue]);
+        setFiles([]);
+        setImages(product.images ?? []);
+
+        setValue("images", product.images ?? []);
+    }, [product, reset, setValue]);
 
     const handleRemoveImage = (index: number) => {
         const updatedImages = images.filter((_, i) => i !== index);
@@ -517,6 +520,7 @@ export const ProductForm = ({
                                                 />
                                             </div>
                                             <button
+                                                type="button"
                                                 className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                                                 onClick={() =>
                                                     handleRemoveImage(index)
