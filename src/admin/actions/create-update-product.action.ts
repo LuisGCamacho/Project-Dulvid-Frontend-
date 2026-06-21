@@ -11,35 +11,35 @@ export const createUpdateProductAction = async (
 
     const isCreating = id === "new";
 
-    const stock = Number(rest.stock || 0);
-    const price = Number(rest.price || 0);
+    rest.stock = Number(rest.stock || 0);
+    rest.price = Number(rest.price || 0);
 
-    let finalImages: string[] = [...images];
-
-    // 🔥 Subir nuevos archivos
+    // Preparar las imágenes
     if (files.length > 0) {
-        const uploadedUrls = await uploadFiles(files);
-        finalImages.push(...uploadedUrls);
+        const newImageNames = await uploadFiles(files);
+        images.push(...newImageNames);
     }
+
+    const imagesToSave = images.map((image) => {
+        if (image.includes("http")) return image.split("/").pop() || "";
+        return image;
+    });
 
     const { data } = await projectApi<Product>({
         url: isCreating ? "/products" : `/products/${id}`,
         method: isCreating ? "POST" : "PATCH",
         data: {
             ...rest,
-            stock,
-            price,
-            images: finalImages,
+            images: imagesToSave,
         },
     });
 
     return {
         ...data,
-        images: data.images.map((image) =>
-            image.startsWith("http")
-                ? image
-                : `${import.meta.env.VITE_API_URL}/files/product/${image}`,
-        ),
+        images: data.images.map((image) => {
+            if (image.includes("http")) return image;
+            return `${import.meta.env.VITE_API_URL}/files/product/${image}`;
+        }),
     };
 };
 
@@ -58,8 +58,10 @@ const uploadFiles = async (files: File[]) => {
             method: "POST",
             data: formData,
         });
-        return data.secureUrl;
+
+        return data.fileName;
     });
 
-    return Promise.all(uploadPromises);
+    const uploadedFileNames = await Promise.all(uploadPromises);
+    return uploadedFileNames;
 };
